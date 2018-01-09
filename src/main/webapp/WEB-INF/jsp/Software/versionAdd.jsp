@@ -235,6 +235,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             }else{
                 $( '#'+file.id ).find('p.state').text(date.msg);
             }
+            console.log(data.date.path);
         });
 		//上传出错的方法
         uploader.on( 'uploadError', function( file ) {

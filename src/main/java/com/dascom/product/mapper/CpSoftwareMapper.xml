@@ -25,15 +25,15 @@
   
   <!-- 返回安全数据. -->
   <select id="findSoftwareBySoftware" resultMap="BaseResultMap" parameterType="com.dascom.product.entity.CpSoftware">
- SELECT 
- s.id id,
+SELECT 
+s.id id,
 s.version version,
 s.version_num version_num,
 s.system system,
-S.`describe` `describe`,
-S.time time,
+s.`describe` `describe`,
+s.time time,
 s.size size
- from cp_software s  
+from cp_software s  
 LEFT JOIN cp_resource res on res.id =s.rid
     <where>
    		 s.is_new =1

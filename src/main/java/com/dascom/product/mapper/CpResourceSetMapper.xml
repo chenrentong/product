@@ -22,7 +22,7 @@
       This element was generated on Mon Oct 16 14:54:31 CST 2017.
     -->
     select 
-    <include refid="Base_Column_List" />
+   *
     from cp_resource_set
     where title = #{title}
   </select>

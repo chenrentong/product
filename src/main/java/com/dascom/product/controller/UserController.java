@@ -252,10 +252,10 @@ public class UserController {
 			return "请填写4~16位的用户名.";
 		}
 		
-		if(user.getPassword()==null||"".equals(user.getPassword())||passwordTo!=null||"".equals(passwordTo)){
+		if(user.getPassword()==null||"".equals(user.getPassword())||passwordTo==null||"".equals(passwordTo)){
 			return "密码或重复密码不能为空.";
 		}
-		if(user.getPassword().equals(passwordTo)){
+		if(!user.getPassword().equals(passwordTo)){
 			return "二次密码不一样.";
 		}
 		if(user.getPassword().length()<=4&&user.getPassword().length()>=16){

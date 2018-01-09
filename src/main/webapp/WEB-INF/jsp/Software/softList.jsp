@@ -35,8 +35,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 资源管理 <span class="c-gray en">&gt;</span> 软件管理 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 <div class="page-container">
     <div class="text-c">
-        <form class="findAppPage" method="post" action="" target="_self">
-            <input type="text" class="input-text" style="width:250px" placeholder="软件名称" name="like" value="${like }">
+        <form  method="post" action="findAppPage">
+            <input type="text" class="input-text" style="width:250px" placeholder="软件名称" name="like" value="${like}">
             <button type="submit" class="btn btn-success" name=""><i class="Hui-iconfont">&#xe665;</i> 搜软件</button>
         </form>
     </div>
@@ -183,7 +183,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		//总条数
 		var pageTotal = parseInt('${listRes.total}');
 		//页面地址
-		var pageStart = "href='findAppPage?pageNumber=";
+		var like='${like}';
+		var pageStart = "href='findAppPage?like="+like+"&pageNumber=";
 		var pageEnd = "'";
 
 		if(pages == 0) pages = 1;

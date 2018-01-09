@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dascom.product.dao.WorkOrderMapper" >
+  <resultMap id="BaseResultMap" type="com.dascom.product.entity.WorkOrder" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="theme" property="theme" jdbcType="VARCHAR" />
+    <result column="attachment_path" property="attachmentPath" jdbcType="VARCHAR" />
+    <result column="attachment_suffix" property="attachmentSuffix" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="e_mail" property="eMail" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="partner_id" property="partnerId" jdbcType="INTEGER" />
+    <result column="start_time" property="startTime" jdbcType="TIMESTAMP" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
+    <result column="is_solve" property="isSolve" jdbcType="INTEGER" />
+    <result column="solve_project" property="solveProject" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  
+  <select id="findWorkOrderPageByThis" resultMap="BaseResultMap" parameterType="com.dascom.product.entity.WorkOrder" >
+  select * from work_order o 
+  <where>
+  	<if test="theme!=null">
+  	o.theme like #{theme}
+  	</if>
+  	<if test="isSolve!=null">
+  		and o.is_solve=#{isSolve}
+  	</if>
+  </where>
+ORDER BY  o.is_solve,o.start_time desc
+  </select>
+  
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, theme, attachment_path, attachment_suffix, name, e_mail, phone, partner_id, start_time, 
+    content
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.dascom.product.entity.WorkOrderExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from work_order
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    *
+    from work_order
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from work_order
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.dascom.product.entity.WorkOrderExample" >
+    delete from work_order
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.dascom.product.entity.WorkOrder" >
+    insert into work_order (id, theme, attachment_path, 
+      attachment_suffix, name, e_mail, 
+      phone, partner_id, start_time, 
+      content)
+    values (#{id,jdbcType=INTEGER}, #{theme,jdbcType=VARCHAR}, #{attachmentPath,jdbcType=VARCHAR}, 
+      #{attachmentSuffix,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{eMail,jdbcType=VARCHAR}, 
+      #{phone,jdbcType=VARCHAR}, #{partnerId,jdbcType=INTEGER}, #{startTime,jdbcType=TIMESTAMP}, 
+      #{content,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.dascom.product.entity.WorkOrder" >
+    insert into work_order
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="theme != null" >
+        theme,
+      </if>
+      <if test="attachmentPath != null" >
+        attachment_path,
+      </if>
+      <if test="attachmentSuffix != null" >
+        attachment_suffix,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="eMail != null" >
+        e_mail,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="partnerId != null" >
+        partner_id,
+      </if>
+      <if test="startTime != null" >
+        start_time,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="theme != null" >
+        #{theme,jdbcType=VARCHAR},
+      </if>
+      <if test="attachmentPath != null" >
+        #{attachmentPath,jdbcType=VARCHAR},
+      </if>
+      <if test="attachmentSuffix != null" >
+        #{attachmentSuffix,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="eMail != null" >
+        #{eMail,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="partnerId != null" >
+        #{partnerId,jdbcType=INTEGER},
+      </if>
+      <if test="startTime != null" >
+        #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.dascom.product.entity.WorkOrderExample" resultType="java.lang.Integer" >
+    select count(*) from work_order
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update work_order
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.theme != null" >
+        theme = #{record.theme,jdbcType=VARCHAR},
+      </if>
+      <if test="record.attachmentPath != null" >
+        attachment_path = #{record.attachmentPath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.attachmentSuffix != null" >
+        attachment_suffix = #{record.attachmentSuffix,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.eMail != null" >
+        e_mail = #{record.eMail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phone != null" >
+        phone = #{record.phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.partnerId != null" >
+        partner_id = #{record.partnerId,jdbcType=INTEGER},
+      </if>
+      <if test="record.startTime != null" >
+        start_time = #{record.startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.content != null" >
+        content = #{record.content,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update work_order
+    set id = #{record.id,jdbcType=INTEGER},
+      theme = #{record.theme,jdbcType=VARCHAR},
+      attachment_path = #{record.attachmentPath,jdbcType=VARCHAR},
+      attachment_suffix = #{record.attachmentSuffix,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      e_mail = #{record.eMail,jdbcType=VARCHAR},
+      phone = #{record.phone,jdbcType=VARCHAR},
+      partner_id = #{record.partnerId,jdbcType=INTEGER},
+      start_time = #{record.startTime,jdbcType=TIMESTAMP},
+      content = #{record.content,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dascom.product.entity.WorkOrder" >
+    update work_order
+    <set >
+      <if test="isSolve != null" >
+        is_solve = #{isSolve,jdbcType=VARCHAR},
+      </if>
+      <if test="solveProject!=null">
+      solve_project=#{solveProject},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dascom.product.entity.WorkOrder" >
+    update work_order
+    set theme = #{theme,jdbcType=VARCHAR},
+      attachment_path = #{attachmentPath,jdbcType=VARCHAR},
+      attachment_suffix = #{attachmentSuffix,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      e_mail = #{eMail,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      partner_id = #{partnerId,jdbcType=INTEGER},
+      start_time = #{startTime,jdbcType=TIMESTAMP},
+      content = #{content,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

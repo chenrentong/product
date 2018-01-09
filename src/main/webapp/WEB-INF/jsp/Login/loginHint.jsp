@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -63,7 +63,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		if(window.parent.document.referrer==""){
 			$("#href").attr("href","login"); 
 		}else{
-			$("#href").attr("href",window.parent.document.referrer); 
+			$("#href").attr("href","login"); 
 		}
 		
 		function showTime(){ 

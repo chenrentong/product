@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import com.dascom.product.dao.CpUserMapper;
 import com.dascom.product.entity.CpUser;
-import com.dascom.product.entity.UpdateInfo;
 import com.dascom.product.service.UserService;
 import com.dascom.product.util.PageBeanUtil;
 import com.dascom.product.util.PagedResult;
@@ -25,10 +24,7 @@ public class UserServiceImpl implements UserService {
 		return cpUserMapper.selectCpUserByUsername(username);
 	}
 
-	@Override
-	public UpdateInfo findUpdateInfo() {
-		return null;
-	}
+	
 
 	@Override
 	public PagedResult<CpUser> findByNamePage(String like, Integer pageNumber,

@@ -20,8 +20,8 @@ public interface LoginConstant
     String LOGIN_ERROR_CODE_100004 = "100004";
     String LOGIN_ERROR_MESSAGE_FORCELOGOUT = "您已经被管理员强制退出，请重新登录";
 
-    String HOSTNAME="192.168.11.124";
-    String PORT="5656";
+    /*String HOSTNAME="192.168.11.124";
+    String PORT="5656";*/
     
     
     String ERROR_CODE="1001";

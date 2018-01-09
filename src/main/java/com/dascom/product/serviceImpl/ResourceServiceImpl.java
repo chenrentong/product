@@ -14,7 +14,6 @@ import com.dascom.product.entity.CpResource;
 import com.dascom.product.entity.CpResourceExample;
 import com.dascom.product.entity.CpResourceSet;
 import com.dascom.product.entity.CpSoftware;
-import com.dascom.product.entity.UpdateInfo;
 import com.dascom.product.service.ResourceService;
 import com.dascom.product.util.PageBeanUtil;
 import com.dascom.product.util.PagedResult;
@@ -30,12 +29,6 @@ public class ResourceServiceImpl implements ResourceService {
 	@Autowired
 	private CpSoftwareMapper cpSoftwareMapper;
 	
-	
-	@Override
-	public UpdateInfo findUpdateInfo() {
-		//分支+主干
-		return null;
-	}
 
 	@Override
 	public PagedResult<CpResourceExample> findApp(Integer pageNumber,
@@ -109,7 +102,8 @@ public class ResourceServiceImpl implements ResourceService {
 		if(pageNumber!=null&&pageSize!=null)
 			PageHelper.startPage(pageNumber,pageSize);
 		
-		return PageBeanUtil.toPagedResult(cpResourceMapper.selectByTypeTitle(typeTitle,like!=null?"%"+like+"%":"%%" ));
+		List<CpResourceExample> list=cpResourceMapper.selectByTypeTitle(typeTitle,like!=null?"%"+like+"%":"%%" );
+		return PageBeanUtil.toPagedResult(list);
 	}
 
 	@Override
@@ -235,6 +229,17 @@ public class ResourceServiceImpl implements ResourceService {
 			PageHelper.startPage(pageNumber,pageSize);
 		
 		return PageBeanUtil.toPagedResult(cpResourceMapper.selectByTypeTitle(typeName,null));
+	}
+
+	@Override
+	public void editSoftDownloadNum(CpSoftware soft) {
+		if(soft.getDownloadNum()==null){
+			soft.setDownloadNum(1);
+		}else{
+			soft.setDownloadNum(soft.getDownloadNum()+1);
+		}
+		cpSoftwareMapper.updateByPrimaryKeySelective(soft);
+		
 	}
 
 

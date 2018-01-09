@@ -13,11 +13,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
     <meta http-equiv="Cache-Control" content="no-siteapp" />
-    
+    <link href="<%=basePath%>/lib/Hui-iconfont/1.0.8/iconfont.css" rel="stylesheet" type="text/css" />
     <link href="<%=basePath%>/static/h-ui/css/H-ui.min.css" rel="stylesheet" type="text/css" />
     <link href="<%=basePath%>/static/h-ui.admin/css/H-ui.login.css" rel="stylesheet" type="text/css" />
     <link href="<%=basePath%>/static/h-ui.admin/css/style.css" rel="stylesheet" type="text/css" />
-    <link href="<%=basePath%>/lib/Hui-iconfont/1.0.8/iconfont.css" rel="stylesheet" type="text/css" />
     <!--[if IE 6]>
     <script type="text/javascript" src="__H-UI__/lib/DD_belatedPNG_0.0.8a-min.js" ></script>
     <script>DD_belatedPNG.fix('*');</script>
@@ -96,11 +95,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					window.location.href = "<%=basePath%>/index";
 				}
 				if(res.code!="1000"){
-					window.location.href = "<%=basePath%>/loginHint?hint="+res.msg;
+					alert(res.msg);
+					<%-- window.location.href = "<%=basePath%>/loginHint?hint="+res.msg; --%>
 				}
 			},
 			error: function() {
-				alert("发生错误！");
+				console.log("发生错误！");
 			}
 		});
     }

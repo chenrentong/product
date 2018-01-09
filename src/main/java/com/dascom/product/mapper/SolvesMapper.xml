@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dascom.product.dao.SolvesMapper">
+  <resultMap id="BaseResultMap" type="com.dascom.product.entity.Solves">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="cover_url" jdbcType="VARCHAR" property="coverUrl" />
+    <result column="context" jdbcType="VARCHAR" property="context" />
+    <result column="topper" jdbcType="INTEGER" property="topper" />
+    <result column="time" jdbcType="TIMESTAMP" property="time" />
+    <result column="Prof" jdbcType="INTEGER" property="prof" />
+  </resultMap>
+  
+  <select id="selectBytitle" resultMap="BaseResultMap" parameterType="java.lang.String">
+  select * from solves s 
+	  <where>
+	  	<if test="title!=null">
+	  		 s.title like #{title}
+	  	</if>
+	  </where>
+  order by s.topper DESC
+  </select>
+  
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, title, thumbnail, context, topper, time, Prof
+  </sql>
+  
+  <select id="selectByExample" parameterType="com.dascom.product.entity.Solves" resultMap="BaseResultMap">
+    select
+  	*
+    from solves s
+    <where>
+    	<if test="topper!=null">
+    	 s.topper = #{topper}
+    	</if>
+    	<if test="title!=null">
+    	and s.title = #{title}
+    	</if>
+    	and s.prof=1
+    </where>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    * 
+    from solves
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from solves
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.dascom.product.entity.SolvesExample">
+    delete from solves
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.dascom.product.entity.Solves">
+    insert into solves (id, title, thumbnail, 
+      context, topper, time, 
+      Prof)
+    values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{thumbnail,jdbcType=VARCHAR}, 
+      #{context,jdbcType=VARCHAR}, #{topper,jdbcType=INTEGER}, #{time,jdbcType=TIMESTAMP}, 
+      #{prof,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.dascom.product.entity.Solves">
+    insert into solves
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="title != null">
+        title,
+      </if>
+      <if test="coverUrl != null">
+        cover_url,
+      </if>
+      <if test="context != null">
+        context,
+      </if>
+      <if test="topper != null">
+        topper,
+      </if>
+      <if test="time != null">
+        time,
+      </if>
+      <if test="prof != null">
+        Prof,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="coverUrl != null">
+        #{coverUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="context != null">
+        #{context,jdbcType=VARCHAR},
+      </if>
+      <if test="topper != null">
+        #{topper,jdbcType=INTEGER},
+      </if>
+      <if test="time != null">
+        #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="prof != null">
+        #{prof,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.dascom.product.entity.SolvesExample" resultType="java.lang.Integer">
+    select count(*) from solves
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update solves
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.title != null">
+        title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.thumbnail != null">
+        thumbnail = #{record.thumbnail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.context != null">
+        context = #{record.context,jdbcType=VARCHAR},
+      </if>
+      <if test="record.topper != null">
+        topper = #{record.topper,jdbcType=INTEGER},
+      </if>
+      <if test="record.time != null">
+        time = #{record.time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.prof != null">
+        Prof = #{record.prof,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update solves
+    set id = #{record.id,jdbcType=INTEGER},
+      title = #{record.title,jdbcType=VARCHAR},
+      thumbnail = #{record.thumbnail,jdbcType=VARCHAR},
+      context = #{record.context,jdbcType=VARCHAR},
+      topper = #{record.topper,jdbcType=INTEGER},
+      time = #{record.time,jdbcType=TIMESTAMP},
+      Prof = #{record.prof,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dascom.product.entity.Solves">
+    update solves
+    <set>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="coverUrl != null">
+        cover_url = #{coverUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="context != null">
+        context = #{context,jdbcType=VARCHAR},
+      </if>
+      <if test="topper != null">
+        topper = #{topper,jdbcType=INTEGER},
+      </if>
+      <if test="time != null">
+        time = #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="prof != null">
+        Prof = #{prof,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dascom.product.entity.Solves">
+    update solves
+    set title = #{title,jdbcType=VARCHAR},
+      thumbnail = #{thumbnail,jdbcType=VARCHAR},
+      context = #{context,jdbcType=VARCHAR},
+      topper = #{topper,jdbcType=INTEGER},
+      time = #{time,jdbcType=TIMESTAMP},
+      Prof = #{prof,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

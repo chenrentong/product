@@ -7,15 +7,10 @@ import org.springframework.web.multipart.MultipartFile;
 import com.dascom.product.entity.CpResource;
 import com.dascom.product.entity.CpResourceExample;
 import com.dascom.product.entity.CpSoftware;
-import com.dascom.product.entity.UpdateInfo;
 import com.dascom.product.util.PagedResult;
 
 public interface ResourceService {
-	/**
-	 * 查询更新信息
-	 * @return
-	 */
-	UpdateInfo findUpdateInfo();
+	
 	/**
 	 * 查询应用软件
 	 * @param pageNumber
@@ -135,5 +130,10 @@ public interface ResourceService {
 	 */
 	PagedResult<CpResourceExample> findResource(String typeName,
 			Integer pageNumber, Integer pageSize);
+	/**
+	 * 下载量+1
+	 * @param soft
+	 */
+	void editSoftDownloadNum(CpSoftware soft);
 
 }

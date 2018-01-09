@@ -35,12 +35,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 管理员管理 <span class="c-gray en">&gt;</span> 管理员列表 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 <div class="page-container">
     <div class="text-c">
-        <form action="" method="post">
-            <input type="text" class="input-text" style="width:250px" placeholder="输入管理员名称" id="" name="key">
-            <button type="submit" class="btn btn-success" id="like" name=""><i class="Hui-iconfont">&#xe665;</i> 搜用户</button>
+        <form action="findUserList" method="post">
+            <input type="text" class="input-text" style="width:250px" placeholder="输入管理员名称" id="" value="${like }" name="like">
+            <button type="submit" class="btn btn-success" id="like" name=""><i class="Hui-iconfont">&#xe665;</i> 搜管理员</button>
         </form>
     </div>
-    <div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l"><a href="javascript:;" onclick="datadel()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a> <a href="javascript:;" onclick="admin_add('添加管理员','addUser.html','800','600')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加管理员</a></span> <span class="r">共有数据：<strong>${userList.total}</strong> 条</span> </div>
+    <div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l"><a href="javascript:;" onclick="datadel()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a> <a href="javascript:;" onclick="admin_add('添加管理员','addUser','','600')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加管理员</a></span> <span class="r">共有数据：<strong>${userList.total}</strong> 条</span> </div>
     <table class="table table-border table-bordered table-bg">
         <thead>
         <tr>
@@ -254,7 +254,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		//总条数
 		var pageTotal = parseInt('${userList.total}');
 		//页面地址
-		var pageStart = "href='findUserList?like="+$("#like").val()+"&pageNumber=";
+		var like='${like}';
+		var pageStart = "href='findUserList?like="+like+"&pageNumber=";
 		var pageEnd = "'";
 
 		if(pages == 0) pages = 1;

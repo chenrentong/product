@@ -41,8 +41,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <li class="dropDown dropDown_hover">
                         <a href="#" class="dropDown_A">${cpUser.username}<i class="Hui-iconfont">&#xe6d5;</i></a>
                         <ul class="dropDown-menu menu radius box-shadow">
-                            <li><a href="../Login/index.html">切换账户</a></li>
-                            <li><a href="{:U('Login/logout')}">退出</a></li>
+                            <li><a href="login">切换账户</a></li>
+                            <li><a href="logout">退出</a></li>
                         </ul>
                     </li>
                     <li id="Hui-skin" class="dropDown right dropDown_hover"> <a href="javascript:;" class="dropDown_A" title="换肤"><i class="Hui-iconfont" style="font-size:18px">&#xe62a;</i></a>
@@ -85,9 +85,30 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                      -->
                     <li><a data-href="findAppPage" data-title="应用软件" href="javascript:void(0)">应用软件</a></li>
                     <li><a data-href="findSDKPage" data-title="二次开发包" href="javascript:void(0)">二次开发包</a></li>
+                    <li><a data-href="/DascomBack/videoList" data-title="视频管理" href="javascript:void(0)">视频管理</a></li>
+                    <li><a data-href="/DascomBack/downloadList" data-title="下载管理" href="javascript:void(0)">下载管理</a></li>
                 </ul>
             </dd>
         </dl>
+        <dl id="menu-solves">
+            <dt><i class="Hui-iconfont">&#xe63e;</i> 产品管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+            <dd>
+                <ul>
+                    <li><a data-href="/DascomBack/classifyList" data-title="分类管理" href="javascript:void(0)">分类管理</a></li>
+                    <li><a data-href="/DascomBack/productList" data-title="产品管理" href="javascript:void(0)">产品管理</a></li>
+                </ul>
+            </dd>
+        </dl>
+        <dl id="menu-solves">
+            <dt><i class="Hui-iconfont">&#xe63e;</i> 合作伙伴<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+            <dd>
+                <ul>
+                    <li><a data-href="/DascomBack/shareInformationList" data-title="资源分享" href="javascript:void(0)">资源分享</a></li>
+                    <li><a data-href="/DascomBack/partnersList" data-title="公司列表" href="javascript:void(0)">公司列表</a></li>
+                </ul>
+            </dd>
+        </dl>
+        
         <dl id="menu-solves">
             <dt><i class="Hui-iconfont">&#xe63e;</i> 方案管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
             <dd>
@@ -96,6 +117,26 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 </ul>
             </dd>
         </dl>
+        <dl id="menu-solves">
+            <dt><i class="Hui-iconfont">&#xe63e;</i> 工单管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+            <dd>
+                <ul>
+                    <li><a data-href="findWorkOrderList" data-title="客户工单" href="javascript:void(0)">客户工单</a></li>
+                </ul>
+            </dd>
+        </dl>
+        <dl id="menu-solves">
+            <dt><i class="Hui-iconfont">&#xe63e;</i>  客服后台<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+            <dd>
+                <ul>
+                	<li><a data-href="/DascomChat/userControl.do" data-title="客服管理" href="javascript:void(0)">客服管理</a></li>
+                	<li><a data-href="/DascomChat/PrinterProcedureOrderList.do" data-title="后台工单" href="javascript:void(0)">后台工单</a></li>
+                    <li><a data-href="/DascomChat/login2Page" data-title="得实客服" href="javascript:void(0)">得实客服</a></li>
+                </ul>
+            </dd>
+        </dl>
+       
+        
        <!--  <dl id="menu-product">
             <dt><i class="Hui-iconfont">&#xe620;</i> 产品管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
             <dd>
@@ -105,6 +146,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 </ul>
             </dd>
         </dl> -->
+        
+        
+        
+        
+        
+        
+        
+        
+        
         <dl id="menu-admin">
             <dt><i class="Hui-iconfont">&#xe62d;</i> 权限管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
             <dd>

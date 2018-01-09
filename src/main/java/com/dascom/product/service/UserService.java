@@ -1,14 +1,13 @@
 package com.dascom.product.service;
 
 import com.dascom.product.entity.CpUser;
-import com.dascom.product.entity.UpdateInfo;
 import com.dascom.product.util.PagedResult;
 
 public interface UserService {
 
 	 CpUser findCpUserByUsername(String username);
 
-	UpdateInfo findUpdateInfo();
+
 	
 	/**
 	 * 查询User分页数据.

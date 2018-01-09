@@ -23,14 +23,14 @@
   
   <select id="selectByTypeTitle" resultMap="BaseResultMap" parameterType="java.lang.String" >
 select res.*,count(s.id) count ,sum(s.download_num) download_num from cp_resource res
-LEFT JOIN cp_resource_set res_s on res_s.id =res.type
+LEFT JOIN cp_resource_set ress on ress.id =res.type
 LEFT JOIN cp_software s on s.rid=res.id
 <where>
-	<if test="title!=null">
-	res_s .title= #{title} 
-	</if>
 	<if test="like!=null">
-	and res.title like #{like}
+	res.title like #{like} 
+	</if>
+	<if test="title!=null">
+	and ress.title =  #{title} 
 	</if>
 </where>
 GROUP BY res.id
